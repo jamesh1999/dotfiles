@@ -1,6 +1,3 @@
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
 alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias dr='direnv reload'
