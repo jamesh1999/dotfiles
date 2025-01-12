@@ -30,7 +30,7 @@ set visualbell
 set wildmenu
 set noruler " For airline
 set noshowmode " "
-
+set clipboard=unnamedplus
 set shiftwidth=4
 set tabstop=4
 

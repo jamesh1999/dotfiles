@@ -6,6 +6,7 @@
 - zoxide
 - tmux
 - zsh
+- [oh-my-posh](https://ohmyposh.dev/)
 
 ## Usage
 Use GNU `stow` to link to the correct locations

@@ -1,0 +1,22 @@
+[include]
+	path = ~/.gituser
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = false
+
+[push]
+	autoSetupRemote = true
+[branch]
+	sort = -committerdate
+
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+[url "git@gitlab.com:"]
+	insteadOf = "https://gitlab.com/"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
