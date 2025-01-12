@@ -4,12 +4,14 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/Colorizer'
 Plug 'sheerun/vim-polyglot'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " Colour setup
 " ============
 set t_Co=256
 set notermguicolors
+colorscheme nord
 
 " Settings
 " ========
@@ -19,7 +21,6 @@ set ignorecase
 set smartcase
 set incsearch
 set magic " Better regex
-set lazyredraw " Don't redraw during macros
 set number
 set relativenumber
 set noswapfile

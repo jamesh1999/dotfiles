@@ -1,0 +1,6 @@
+import = [
+	"~/.config/alacritty/nord.toml"
+]
+
+[window]
+padding = { x=3, y=3 }

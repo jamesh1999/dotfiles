@@ -3,6 +3,7 @@ alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; 
 alias dr='direnv reload'
 alias ls='ls --color'
 alias cd='z'
+alias cls='clear'
 
 eval "$(direnv hook zsh)"
 
