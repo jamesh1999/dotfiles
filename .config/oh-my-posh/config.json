@@ -65,7 +65,7 @@
 				"fetch_stash_count": true,
 				"fetch_status": true
 			},
-			"template": "{{ if (gt .Behind 0) }} \uf063{{ .Behind }}{{ end }}{{ if (gt .Ahead 0) }} \uf062{{ .Ahead }}{{ end }}{{ if and (or (gt .Behind 0) (gt .Ahead 0)) (or .Staging.Changed .Working.Changed)}} |{{ end }}{{ if .Staging.Changed }}<green> \uf046{{ add .Staging.Unmerged .Staging.Deleted .Staging.Added .Staging.Modified .Staging.Untracked }}</>{{ end }}{{ if .Working.Changed }}<yellow> \uf044{{ add .Working.Unmerged .Working.Deleted .Working.Added .Working.Modified .Working.Untracked }}</>{{ end }}{{ if gt .StashCount 0 }}<cyan> \ueb4b{{ .StashCount }}</>{{ end }} ",
+			"template": "{{ if (gt .Behind 0) }} \uf063{{ .Behind }}{{ end }}{{ if (gt .Ahead 0) }} \uf062{{ .Ahead }}{{ end }}{{ if and (or (gt .Behind 0) (gt .Ahead 0)) (or .Staging.Changed .Working.Changed (gt .StashCount 0))}} |{{ end }}{{ if .Staging.Changed }}<green> \uf046{{ add .Staging.Unmerged .Staging.Deleted .Staging.Added .Staging.Modified .Staging.Untracked }}</>{{ end }}{{ if .Working.Changed }}<yellow> \uf044{{ add .Working.Unmerged .Working.Deleted .Working.Added .Working.Modified .Working.Untracked }}</>{{ end }}{{ if gt .StashCount 0 }}<cyan> \ueb4b{{ .StashCount }}</>{{ end }} ",
 			"type": "git"
 		}
 	],
