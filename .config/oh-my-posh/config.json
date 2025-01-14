@@ -41,6 +41,7 @@
 						"max_depth": 2,
 						"folder_icon": "\uf141",
 						"folder_separator_icon": " \ue0b1 ",
+						"right_format": "<b>%s</b>",
 						"style": "agnoster_short"
 					}
 				}

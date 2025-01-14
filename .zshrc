@@ -31,6 +31,7 @@ alias dr='direnv reload'
 alias ls='ls --color'
 alias cd='z'
 alias cls='clear'
+alias g='git'
 
 eval "$(direnv hook zsh)"
 
