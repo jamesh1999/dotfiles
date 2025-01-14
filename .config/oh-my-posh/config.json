@@ -19,7 +19,8 @@
 					"foreground": "green",
 					"foreground_templates": [
 						"{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}",
-						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}lightGray{{ end }}"
+						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}red{{ end }}",
+						"{{ if or (gt .Ahead 0) (gt .Behind 0) }}lightGray{{ end }}"
 					],
 					"powerline_symbol": "\uE0B0",
 					"properties": {
