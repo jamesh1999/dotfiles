@@ -1,3 +1,4 @@
+#zmodload zsh/zprof
 # Setup zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -5,9 +6,9 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+#zinit light zsh-users/zsh-syntax-highlighting
+#zinit light zsh-users/zsh-completions
+#zinit light zsh-users/zsh-autosuggestions
 
 # Settings
 HISTSIZE=5000
@@ -30,14 +31,11 @@ alias ls='ls --color'
 alias cd='z'
 alias cls='clear'
 alias g='git'
+alias tm='tmux'
 
 eval "$(direnv hook zsh)"
 
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+autoload -Uz compinit; compinit
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
@@ -47,3 +45,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
 eval "$(zoxide init zsh)"
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+#zprof

@@ -5,6 +5,10 @@ import = [
 [window]
 padding = { x=3, y=3 }
 
+[shell]
+program = "tmux"
+args = ["new-session", "-ADs", "main"]
+
 [font]
 size = 12.0
 
