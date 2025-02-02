@@ -5,18 +5,11 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Plugins
-#zinit light zsh-users/zsh-syntax-highlighting
-#zinit light zsh-users/zsh-completions
-#zinit light zsh-users/zsh-autosuggestions
-
 # Settings
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 setopt appendhistory
-setopt sharehistory
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
@@ -28,7 +21,6 @@ alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias dr='direnv reload'
 alias ls='ls --color'
-alias cd='z'
 alias cls='clear'
 alias g='git'
 alias tm='tmux'
@@ -40,11 +32,10 @@ autoload -Uz compinit; compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 
-#powerline-daemon -q
-#. /usr/share/powerline/bindings/zsh/powerline.zsh
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
+eval "$(zoxide init --cmd cd zsh)"
 
-eval "$(zoxide init zsh)"
+# Plugins
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \

@@ -10,6 +10,17 @@
 [branch]
 	sort = -committerdate
 
+# VSCode for diff/merge
+[diff]
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+
+# Use SSH always
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 [url "git@gitlab.com:"]

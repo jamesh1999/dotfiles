@@ -3,7 +3,8 @@ import = [
 ]
 
 [window]
-padding = { x=3, y=3 }
+padding = { x=4, y=4 }
+dimensions = { columns=120, lines=40 }
 
 [shell]
 program = "tmux"
