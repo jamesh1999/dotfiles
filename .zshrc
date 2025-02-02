@@ -43,4 +43,6 @@ zinit wait lucid for \
     zsh-users/zsh-completions \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
+
+bindkey '^ ' autosuggest-accept # ctrl+space
 #zprof

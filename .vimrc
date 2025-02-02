@@ -73,7 +73,8 @@ cnoreabbrev qw wq
 
 " Plugin configuration
 " ====================
-
+"
+let g:airline_powerline_fonts = 1
 let g:python_highlight_indent_errors = 1
 let g:python_highlight_space_errors = 1
 let g:cpp_class_decl_highlight = 1
