@@ -9,7 +9,7 @@
 			"segments": [
 				{
 					"background": "blue",
-					"foreground": "darkGray",
+					"foreground": "black",
 					"style": "powerline",
 					"template": " <b>{{.HostName}}</b> ",
 					"type": "session"

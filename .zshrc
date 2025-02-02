@@ -41,8 +41,9 @@ zinit wait lucid for \
     zdharma-continuum/fast-syntax-highlighting \
  blockf \
     zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
+ atload"!_zsh_autosuggest_start; \
+ 	bindkey '^ ' autosuggest-accept" \
     zsh-users/zsh-autosuggestions
 
-bindkey '^ ' autosuggest-accept # ctrl+space
+#bindkey '^ ' autosuggest-accept # ctrl+space
 #zprof
