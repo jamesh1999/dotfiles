@@ -28,7 +28,7 @@
 						"full_branch_path": false
 					},
 					"style": "powerline",
-					"template": " {{ .HEAD }} ",
+					"template": " {{ abbrev 15 (.HEAD) }} ",
 					"type": "git"
 				},
 				{
