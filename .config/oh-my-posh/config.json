@@ -55,13 +55,7 @@
 				"git",
 				"g"
 			],
-			"foreground": "green",
-			"foreground_templates": [
-				"{{ if or (.Working.Changed) (.Staging.Changed) }}lightGray{{ end }}",
-				"{{ if and (gt .Ahead 0) (gt .Behind 0) }}lightGray{{ end }}",
-				"{{ if gt .Ahead 0 }}lightGray{{ end }}",
-				"{{ if gt .Behind 0 }}lightGray{{ end }}"
-			],
+			"foreground": "lightGray",
 			"properties": {
 				"fetch_stash_count": true,
 				"fetch_status": true
