@@ -7,8 +7,9 @@
 - tmux
 - zsh
 - [oh-my-posh](https://ohmyposh.dev/)
+- direnv
 
-## Usage
+## Stow Usage
 Use GNU `stow` to link to the correct locations
 
 In the repo root:
@@ -22,3 +23,14 @@ To grab the latest dotfiles from outside the repo:
 ```
 stow --adopt .
 ```
+
+## Other installation
+In vim:
+Install `vim-plug`
+```
+:PlugInstall
+```
+
+In tmux:
+Install `tpm`
+prefix + I

@@ -4,7 +4,7 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/Colorizer'
 Plug 'sheerun/vim-polyglot'
-Plug 'arcticicestudio/nord-vim'
+Plug 'jamesh1999/nord-vim'
 call plug#end()
 
 " Colour setup
