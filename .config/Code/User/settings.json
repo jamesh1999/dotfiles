@@ -1,5 +1,8 @@
 {
     "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.enabled": false,
+    "latex-workshop.view.pdf.viewer": "browser",
+    "diffEditor.renderSideBySide": false,
     "workbench.colorTheme": "Nord Midnight",
     "git.confirmSync": false,
     "workbench.startupEditor": "none",
@@ -12,6 +15,25 @@
             "allowed": true
         }
     ],
+    "files.associations": {
+        "*.fs": "fsharp"
+    },
+    "[latex]": {
+        "editor.wordWrap": "on"
+    },
+    "editor.accessibilitySupport": "off",
+    "jupyter.askForKernelRestart": false,
+    "hexeditor.columnWidth": 16,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+    "workbench.editor.untitled.hint": "hidden",
+    "platformio-ide.autoOpenPlatformIOIniFile": false,
+    "auto-build.defaultEnv.name": "STM32G0B1RE_btt",
+    "editor.semanticTokenColorCustomizations": {},
+
+
+
     "workbench.colorCustomizations": {
         "testing.coveredGutterBackground": "#425542",
         
@@ -304,6 +326,5 @@
         "tree.indentGuidesStroke": "#616e8866",
         "walkThrough.embeddedEditorBackground": "#181818",
         "widget.shadow": "#00000066",
-    },
-    "editor.semanticTokenColorCustomizations": {}
+    }
 }
