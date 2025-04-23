@@ -70,7 +70,6 @@ button:hover {
 #temperature,
 #network,
 #pulseaudio,
-#custom-media,
 #custom-arkscript,
 #tray,
 #mode,
@@ -123,19 +122,6 @@ label:focus {
 #pulseaudio.muted {
     color: @color9;
     text-decoration: line-through;
-}
-
-#custom-media {
-    color: @color8;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    color: @color15;
-}
-
-#custom-media.custom-vlc {
-    color: @color9;
 }
 
 #temperature {

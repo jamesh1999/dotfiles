@@ -1,9 +1,9 @@
 {
     "layer": "top",
 "position": "top",
-    "height": 30,
+    "height": 38,
     "spacing": 0,
-    "modules-left": ["custom/power", "hyprland/workspaces", "hyprland/submap", "custom/media"],
+    "modules-left": ["custom/power", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "clock", "tray", "custom/swaync"],
 
@@ -92,18 +92,6 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
     },
 
 	"custom/swaync": {
