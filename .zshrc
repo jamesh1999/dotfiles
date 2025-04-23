@@ -30,15 +30,39 @@ killjobs () {
 
 }
 
+# No arguments: 'git status'
+# With arguments: like an alias of 'git'
+g() {
+	if [[ $# -gt 0 ]]; then
+		git "$@"
+	else
+		git status
+	fi
+}
+
+
+# Have less display colours
+# from: https://wiki.archlinux.org/index.php/Color_output_in_console#man
+export LESS_TERMCAP_mb=$'\e[5m'     # begin blink
+export LESS_TERMCAP_md=$'\e[1;34m'     # begin bold
+export LESS_TERMCAP_so=$'\e[01;46;30m' # begin reverse video
+export LESS_TERMCAP_us=$'\e[4;35m'    # begin underline
+export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+export GROFF_NO_SGR=1
+
+export MANPAGER='less -M +Gg'
+
 # Aliases
 alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias dr='direnv reload'
 alias ls='ls --color'
 alias cls='clear'
-alias g='git'
 alias tm='tmux'
 alias exitf='killjobs; exit'
+alias myip='curl http://ipecho.net/plain; echo'
 
 eval "$(direnv hook zsh)"
 
