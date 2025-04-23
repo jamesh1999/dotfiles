@@ -2,7 +2,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
     "latex-workshop.view.pdf.viewer": "browser",
-    "diffEditor.renderSideBySide": false,
     "workbench.colorTheme": "Nord Midnight",
     "git.confirmSync": false,
     "workbench.startupEditor": "none",
