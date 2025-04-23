@@ -16,6 +16,20 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+killjobs () {
+
+    local kill_list="$(jobs)"
+    if [ -n "$kill_list" ]; then
+        # this runs the shell builtin kill, not unix kill, otherwise jobspecs cannot be killed
+        # the `$@` list must not be quoted to allow one to pass any number parameters into the kill
+        # the kill list must not be quoted to allow the shell builtin kill to recognise them as jobspec parameters
+        kill $@ $(sed --regexp-extended --quiet 's/\[([[:digit:]]+)\].*/%\1/gp' <<< "$kill_list" | tr '\n' ' ')
+    else
+        return 0
+    fi
+
+}
+
 # Aliases
 alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
@@ -24,6 +38,7 @@ alias ls='ls --color'
 alias cls='clear'
 alias g='git'
 alias tm='tmux'
+alias exitf='killjobs; exit'
 
 eval "$(direnv hook zsh)"
 
