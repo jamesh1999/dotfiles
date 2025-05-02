@@ -1,9 +1,7 @@
 #zmodload zsh/zprof
-# Setup zinit
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+# Load the Antidote plugin manager
+source ~/.antidote/antidote.zsh
+antidote load
 
 # Settings
 HISTSIZE=5000
@@ -76,15 +74,5 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# Plugins
-zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start; \
- 	bindkey '^ ' autosuggest-accept" \
-    zsh-users/zsh-autosuggestions
-
-#bindkey '^ ' autosuggest-accept # ctrl+space
+bindkey '^ ' autosuggest-accept # ctrl+space
 #zprof
