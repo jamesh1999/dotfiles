@@ -5,6 +5,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'chrisbra/Colorizer'
 Plug 'sheerun/vim-polyglot'
 Plug 'jamesh1999/nord-vim'
+Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 " Colour setup
@@ -37,6 +38,7 @@ set tabstop=4
 
 " Keybinds
 " ========
+map <Esc> :noh <CR>
 imap jj <Esc>
 
 " Prevent arrow keys

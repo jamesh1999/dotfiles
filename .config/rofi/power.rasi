@@ -1,0 +1,151 @@
+/**
+ * Settings used in every rofi option menu:
+ *  - i3-layout
+ *  - music
+ *  - power
+ *  - screenshot
+ */
+@import "colours.rasi"
+
+configuration {
+	show-icons: false;
+}
+
+* {
+  box-spacing: 30px;
+  box-margin: 30px 50px;
+  inputbar-spacing: 30px;
+  list-spacing: 30px;
+  general-padding: 20px;
+  element-padding: 40px 10px;
+
+  background-color: @background;
+  text-color: @foreground;
+}
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    north;
+    anchor:                      north;
+    width:                       1200px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @foreground;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     var(box-spacing);
+    margin:                      0px;
+    padding:                     var(box-margin);
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @foreground;
+    background-color:            transparent;
+    children:                    [ "inputbar", "message", "listview"];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     var(inputbar-spacing);
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                @foreground;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "dummy", "textbox-prompt-colon", "prompt", "dummy"];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "SYSTEM";
+    padding:                     var(general-padding);
+    border-radius:               0px;
+    background-color:            #ff0000;
+    text-color:                  @background;
+}
+prompt {
+    enabled:                     true;
+    padding:                     var(general-padding);
+    border-radius:               0px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+
+    spacing:                     var(list-spacing);
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @foreground;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     var(element-padding);
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @background;
+    background-color:            @background-light;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element-text {
+	font: "Hack Nerd Font 64";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.4;
+}
+element normal.normal {
+    background-color:            @background-light;
+    text-color:                  @foreground;
+}
+element alternate.normal {
+    background-color:            @background-light;
+    text-color:                  @foreground;
+}
+element selected.normal {
+    background-color:            @accent;
+    text-color:                  @background;
+}

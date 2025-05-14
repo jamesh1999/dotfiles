@@ -67,8 +67,8 @@ alias myip='curl http://ipecho.net/plain; echo'
 eval "$(direnv hook zsh)"
 
 autoload -Uz compinit; compinit
-
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+compdef g='git'
 
 
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
