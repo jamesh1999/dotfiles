@@ -4,6 +4,7 @@
 	defaultBranch = main
 [core]
 	autocrlf = false
+	excludesFile = ~/.gitignore-global
 
 [push]
 	autoSetupRemote = true
