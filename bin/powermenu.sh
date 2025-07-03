@@ -14,7 +14,7 @@ chosen=$(printf '%s;%s;%s;%s;%s;\n' "$power_off" "$reboot" "$lock" "$suspend" \
     | rofi -theme-str '@import "power.rasi"' \
            -dmenu \
            -sep ';' \
-		   -p "Uptime: $uptime")
+		   -p "Uptime: $uptime" -click-to-exit)
 
 case "$chosen" in
     "$power_off")
