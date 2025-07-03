@@ -6,6 +6,12 @@
 	autocrlf = false
 	excludesFile = ~/.gitignore-global
 
+[color]
+	ui = auto
+[color "branch"]
+	current = green
+	remote = blue
+
 [fetch]
 	prune = true
 [push]
