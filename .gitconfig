@@ -6,6 +6,8 @@
 	autocrlf = false
 	excludesFile = ~/.gitignore-global
 
+[fetch]
+	prune = true
 [push]
 	autoSetupRemote = true
 [branch]
