@@ -40,6 +40,16 @@ g() {
 	fi
 }
 
+# No arguments: 'code .' in the background
+# With arguments: as normal
+code() {
+	if [[ $# -gt 0 ]]; then
+		/usr/bin/code "$@"
+	else
+		/usr/bin/code . &!
+	fi
+}
+
 
 # Have less display colours
 # from: https://wiki.archlinux.org/index.php/Color_output_in_console#man
