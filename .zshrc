@@ -75,6 +75,8 @@ alias cls='clear'
 alias tm='tmux'
 alias exitf='killjobs; exit'
 alias myip='curl http://ipecho.net/plain; echo'
+alias df='df --human-readable --print-type'
+alias du='du --human-readable --total'
 
 eval "$(direnv hook zsh)"
 

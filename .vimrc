@@ -32,8 +32,10 @@ set wildmenu
 set noruler " For airline
 set noshowmode " "
 set clipboard=unnamedplus
+set expandtab
 set shiftwidth=4
 set tabstop=4
+set scrolloff=4
 
 
 " Keybinds
