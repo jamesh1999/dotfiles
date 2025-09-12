@@ -40,3 +40,8 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[alias]
+    main = !git checkout main && git pull
+    master = !git checkout master && git pull
+    clean-branches = !git_clean_branches.sh
