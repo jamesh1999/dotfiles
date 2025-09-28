@@ -77,6 +77,7 @@ alias exitf='killjobs; exit'
 alias myip='curl http://ipecho.net/plain; echo'
 alias df='df --human-readable --print-type'
 alias du='du --human-readable --total'
+alias sudo='sudo '
 
 eval "$(direnv hook zsh)"
 
