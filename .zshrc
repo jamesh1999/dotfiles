@@ -16,6 +16,7 @@ setopt hist_find_no_dups
 
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
+# Kill all background tasks
 killjobs () {
 
     local kill_list="$(jobs)"
@@ -50,6 +51,11 @@ code() {
 	fi
 }
 
+# Easier nix build + docker load
+nix-docker() {
+  nix build "$1" && ./result | docker load
+}
+
 
 # Have less display colours
 # from: https://wiki.archlinux.org/index.php/Color_output_in_console#man
@@ -68,7 +74,7 @@ export MANPAGER='less -M +Gg'
 alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias dr='direnv reload'
-alias ls='ls --color=auto'
+alias ls='eza'
 alias ip='ip --color=auto'
 alias grep='grep --color=auto'
 alias cls='clear'
@@ -80,6 +86,7 @@ alias du='du --human-readable --total'
 alias sudo='sudo '
 
 eval "$(direnv hook zsh)"
+source <(fzf --zsh)
 
 autoload -Uz compinit; compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
