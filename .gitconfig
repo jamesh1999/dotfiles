@@ -45,6 +45,6 @@
     main = !git checkout main && git pull
     master = !git checkout master && git pull
     clean-branches = !git_clean_branches.sh
-    fz-checkout = !git checkout $(git branch | fzf)
+    fz-checkout = !git checkout $(git branch -a | sed "s#remotes/[^/]*/##" | sort -u | fzf)
     fz-log = !git log --oneline --decorate | fzf --ansi | cut -d' ' -f1 | xargs git show
     fz-stash = !git stash list | fzf | cut -d: -f1 | xargs git stash apply

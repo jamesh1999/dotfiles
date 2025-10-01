@@ -8,7 +8,5 @@ to_delete=$(git branch -vv | grep 'gone\]' | awk '{print $1}')
 if [[ -z "$to_delete" ]]; then
     echo "No local branches to delete."
 else
-    count=$(echo "$to_delete" | wc -l | tr -d ' ')
-    echo "Deleting $count branches..."
-    echo "$to_delete" | xargs -n 1 git branch -D
+    echo "$to_delete" | fzf --multi --bind "load:toggle-all" --preview "git log --oneline --decorate {}"  | xargs -r git branch -D
 fi
