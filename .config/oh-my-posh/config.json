@@ -28,7 +28,7 @@
 						"full_branch_path": false
 					},
 					"style": "powerline",
-					"template": " {{ abbrev 15 (.HEAD) }} ",
+					"template": " {{ if (contains \"/\" .HEAD) }}{{ substr 0 3 .HEAD}}{{ abbrev 12 (last (splitList \"/\" .HEAD)) }}{{ else }}{{ abbrev 15 .HEAD }}{{ end }} ",
 					"type": "git"
 				},
 				{
