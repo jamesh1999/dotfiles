@@ -1,0 +1,7 @@
+.control-center {
+  background: alpha(#181818, 0.80);
+  border-radius: 3px;
+  border: 1px solid #333333;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
+  margin: 6px;
+}
