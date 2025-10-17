@@ -1,8 +1,8 @@
 * {
   alpha:  #00000000;
-  background:  #181818FF;
-  background-light:  #3b4252;
-  se:  #101010ff;
+  background:  #181818CC;
+  background-light:  #333333FF;
+  selected:  #4C566AFF;
   foreground:  #D8DEE9FF;
   accent:  #81A1C1;
 }

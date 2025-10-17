@@ -21,7 +21,6 @@ window {
     background-color:               @alpha;
     text-color:                     @foreground;
 	border:							0px;
-	border-color:					@accent;
     border-radius:                  2px;
 	width:							18%;
     location:                       center;
@@ -60,10 +59,10 @@ inputbar {
 }
 
 listview {
-    background-color:               @background;
+    background-color:               @alpha;
 	border:							0 1px 1px 1px;
 	border-radius:					0 0 2px 2px;
-	border-color:					#4C566A;
+	border-color:					@background-light;
     padding:                        0px;
     columns:                        2;
     lines:                          5;
@@ -100,7 +99,7 @@ element alternate.normal {
 }
 
 element selected.normal {
-	background-color:				#4C566A;
+	background-color:				@selected;
 	text-color:						@foreground;
 }
 
