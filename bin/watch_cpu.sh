@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 watch -n 0.1 grep \"cpu MHz\" /proc/cpuinfo

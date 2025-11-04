@@ -41,15 +41,24 @@ g() {
 	fi
 }
 
-# No arguments: 'code .' in the background
+# Run VS Code in the background
+# No arguments: 'code .'
 # With arguments: as normal
 code() {
-	if [[ $# -gt 0 ]]; then
-		/usr/bin/code "$@"
-	else
-		/usr/bin/code . &!
-	fi
+  local TMP_DIR="${XDG_RUNTIME_DIR:-/tmp}/vscode-tmux"
+  mkdir -p "$TMP_DIR"
+
+  if [[ -n "$TMUX" ]]; then
+    local TMUX_SESSION TMUX_WINDOW
+    TMUX_SESSION=$(tmux display-message -p '#S')
+    TMUX_WINDOW=$(tmux display-message -p '#I')
+
+    echo "$TMUX_SESSION:$TMUX_WINDOW" > "$TMP_DIR/$(basename "$PWD").context"
+  fi
+
+  /usr/bin/code "${@:-.}" &!
 }
+
 
 # Easier nix build + docker load
 nix-docker() {

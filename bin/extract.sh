@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [ -f "$1" ] ; then
   case "$1" in
     *.tar.bz2)   tar xjf "$1"    ;;

@@ -35,12 +35,6 @@
 [url "git@gitlab.com:"]
 	insteadOf = "https://gitlab.com/"
 
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-
 [alias]
     main = !git checkout main && git pull
     master = !git checkout master && git pull
@@ -48,3 +42,9 @@
     fz-checkout = !git_fz_checkout.sh
     fz-log = !git log --oneline --decorate | fzf --ansi | cut -d' ' -f1 | xargs git show
     fz-stash = !git stash list | fzf | cut -d: -f1 | xargs git stash apply
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
