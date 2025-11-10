@@ -1,0 +1,1 @@
+- Always use British English spellings (where possible - the code has to be valid and call the correct function names).

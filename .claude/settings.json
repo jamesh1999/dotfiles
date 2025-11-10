@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(echo:*)"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "h=$(hostname -s); d=$(pwd); d=${d/#$HOME/\\~}; IFS='/' read -ra P <<< \"$d\"; c=${#P[@]}; [ $c -le 2 ] && dd=\"$d\" || dd=\".../${P[$((c-2))]}/${P[$((c-1))]}\"; g=\"\"; if git rev-parse --git-dir >/dev/null 2>&1; then b=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); [[ \"$b\" == *\"/\"* ]] && b=$(basename \"$b\"); b=$(printf \"%.12s\" \"$b\"); if git --no-optional-locks diff --quiet 2>/dev/null && git --no-optional-locks diff --cached --quiet 2>/dev/null; then ab=$(git rev-list --left-right --count @{u}...HEAD 2>/dev/null || echo \"0 0\"); bh=$(echo \"$ab\" | awk '{print $1}'); ah=$(echo \"$ab\" | awk '{print $2}'); [ \"$bh\" -gt 0 ] && [ \"$ah\" -gt 0 ] && gc=\"\\033[31m\" || { [ \"$bh\" -gt 0 ] || [ \"$ah\" -gt 0 ]; } && gc=\"\\033[37m\" || gc=\"\\033[32m\"; else gc=\"\\033[33m\"; fi; g=$(printf \"${gc}%s\\033[0m \" \"$b\"); fi; printf \"\\033[1m%s\\033[0m %s%s\" \"$h\" \"$g\" \"$dd\""
+  }
+}
