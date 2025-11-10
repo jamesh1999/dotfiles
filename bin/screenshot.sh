@@ -16,8 +16,8 @@ hyprpicker -r -z &
 sleep .3
 
 rect=$(slurp)
+killall hyprpicker
 if [[ ! $rect ]]; then
-	killall hyprpicker
 	exit
 fi
 
@@ -25,7 +25,6 @@ mkdir -p $OUTPUT_DIR
 echo $rect | grim -g - "$OUTPUT_DIR/$OUTPUT_FILE"
 wl-copy < "$OUTPUT_DIR/$OUTPUT_FILE"
 
-killall hyprpicker
 
 if [[ $upload ]]; then
 	url=$(curl -X POST \

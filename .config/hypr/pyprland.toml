@@ -1,2 +1,0 @@
-[pyprland]
-plugins = ["expose", "fetch_client_menu"]
