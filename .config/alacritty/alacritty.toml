@@ -32,3 +32,6 @@ style="Regular"
 import = [
 	"~/.config/alacritty/nord.toml"
 ]
+
+[keyboard]
+bindings = [ { key = "Return", mods = "Shift", chars = "\n" } ] 
