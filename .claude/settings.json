@@ -10,6 +10,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "echo \"(In: ${CLAUDE_TOKENS_IN:-0}, Out: ${CLAUDE_TOKENS_OUT:-0}, Cached: ${CLAUDE_TOKENS_CACHED:-0}, Total: ${CLAUDE_TOKENS_TOTAL:-0}) / Cost: \\$${CLAUDE_COST:-0.00}\""
-  }
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "alwaysThinkingEnabled": false
 }
