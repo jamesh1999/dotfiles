@@ -109,3 +109,6 @@ eval "$(zoxide init --cmd cd zsh)"
 
 bindkey '^ ' autosuggest-accept # ctrl+space
 #zprof
+
+# opencode
+export PATH=/home/james/.opencode/bin:$PATH
