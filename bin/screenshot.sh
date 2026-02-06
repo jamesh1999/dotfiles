@@ -16,6 +16,7 @@ hyprpicker -r -z &
 sleep .3
 
 rect=$(slurp)
+sleep .3
 killall hyprpicker
 if [[ ! $rect ]]; then
 	exit
