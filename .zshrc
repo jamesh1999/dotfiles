@@ -95,6 +95,8 @@ alias myip='curl http://ipecho.net/plain; echo'
 alias df='df --human-readable --print-type'
 alias du='du --human-readable --total'
 alias sudo='sudo '
+alias lzd='lazydocker'
+alias lzg='lazygit'
 
 eval "$(direnv hook zsh)"
 source <(fzf --zsh)
