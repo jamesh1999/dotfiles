@@ -1,17 +1,55 @@
-#zmodload zsh/zprof
-# Load the Antidote plugin manager
+if [[ -n "$ZSH_PROFILE" ]]; then
+  zmodload zsh/zprof
+fi
+
+
+
+# Env Vars
+# --------
+# Larger history
+export HISTSIZE=5000
+export HISTFILE=~/.zsh_history
+export SAVEHIST=$HISTSIZE
+
+# Have less display colours
+# from: https://wiki.archlinux.org/index.php/Color_output_in_console#man
+export LESS_TERMCAP_mb=$'\e[5m'     # begin blink
+export LESS_TERMCAP_md=$'\e[1;34m'     # begin bold
+export LESS_TERMCAP_so=$'\e[01;46;30m' # begin reverse video
+export LESS_TERMCAP_us=$'\e[4;35m'    # begin underline
+export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+export GROFF_NO_SGR=1
+
+export MANPAGER='less -M +Gg'
+
+export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,pointer:4,spinner:13 --prompt='❯❯ ' --no-separator --highlight-line"
+
+export PATH=/home/james/.opencode/bin:$PATH
+
+export ZVM_INIT_MODE=sourcing  # Prevents zvm overriding other keybindings
+
+
+# Plugins
+# -------
+# Load plugins via the Antidote plugin manager
 source ~/.antidote/antidote.zsh
 antidote load
 
-# Settings
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
+
+
+# Options
+# -------
 setopt share_history
 setopt hist_verify
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 
+
+
+# Functions
+# ---------
 # Kill all background tasks
 killjobs () {
 
@@ -30,11 +68,7 @@ killjobs () {
 # No arguments: 'git status'
 # With arguments: like an alias of 'git'
 g() {
-	if [[ $# -gt 0 ]]; then
-		git "$@"
-	else
-		git status
-	fi
+  command git "${@:-status}"
 }
 
 # Run VS Code in the background
@@ -62,53 +96,59 @@ nix-docker() {
 }
 
 
-# Have less display colours
-# from: https://wiki.archlinux.org/index.php/Color_output_in_console#man
-export LESS_TERMCAP_mb=$'\e[5m'     # begin blink
-export LESS_TERMCAP_md=$'\e[1;34m'     # begin bold
-export LESS_TERMCAP_so=$'\e[01;46;30m' # begin reverse video
-export LESS_TERMCAP_us=$'\e[4;35m'    # begin underline
-export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
-export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
-export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
-export GROFF_NO_SGR=1
-
-export MANPAGER='less -M +Gg'
-
-export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,pointer:4,spinner:13 --prompt='❯❯ ' --no-separator --highlight-line"
 
 # Aliases
+# -------
+# Shorthands
 alias ra='ranger'
-alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias rcd='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
 alias dr='direnv reload'
-alias ls='eza --icons=auto'
-alias ip='ip --color=auto'
-alias grep='grep --color=auto'
 alias cls='clear'
 alias tm='tmux'
-alias exitf='killjobs; exit'
-alias myip='curl http://ipecho.net/plain; echo'
-alias df='df --human-readable --print-type'
-alias du='du --human-readable --total'
-alias sudo='sudo '
 alias lzd='lazydocker'
 alias lzg='lazygit'
 
+# Prettier output
+alias ls='eza --icons=auto'
+alias ip='ip --color=auto'
+alias grep='grep --color=auto'
+alias df='df --human-readable --print-type'
+alias du='du --human-readable --total'
+
+alias sudo='sudo ' # Make 'sudo {alias}' work
+alias exitf='killjobs; exit'
+alias myip='curl http://ipecho.net/plain; echo'
+
+
+
+# Integrations
+# ------------
 eval "$(direnv hook zsh)"
-source <(fzf --zsh)
-
-autoload -Uz compinit; compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-compdef g='git'
-
-
+eval "$(thefuck --alias)"
+eval "$(fzf --zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 eval "$(zoxide init --cmd cd zsh)"
 
+
+
+# Keybinds
+# --------
 bindkey '^ ' autosuggest-accept # ctrl+space
 bindkey '^[[A' history-search-backward # up arrow
 bindkey '^[[B' history-search-forward # down arrow
-#zprof
 
-# opencode
-export PATH=/home/james/.opencode/bin:$PATH
+
+
+# Completions
+# -----------
+# Initialise completions as late as possible - we don't want anything modifying completions after this
+autoload -Uz compinit; compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+compdef g='git'
+compdef tm='tmux'
+
+
+
+if [[ -n "$ZSH_PROFILE" ]]; then
+  zprof
+fi
