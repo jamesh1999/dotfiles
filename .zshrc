@@ -7,14 +7,10 @@ antidote load
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-setopt appendhistory
+setopt share_history
+setopt hist_verify
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
 # Kill all background tasks
 killjobs () {
@@ -85,7 +81,7 @@ export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,poin
 alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias dr='direnv reload'
-alias ls='eza'
+alias ls='eza --icons=auto'
 alias ip='ip --color=auto'
 alias grep='grep --color=auto'
 alias cls='clear'
@@ -110,6 +106,8 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 eval "$(zoxide init --cmd cd zsh)"
 
 bindkey '^ ' autosuggest-accept # ctrl+space
+bindkey '^[[A' history-search-backward # up arrow
+bindkey '^[[B' history-search-forward # down arrow
 #zprof
 
 # opencode
