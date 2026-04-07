@@ -1,0 +1,8 @@
+{
+  "Colorizer": { "branch": "master", "commit": "f5d69c0dea9f36e2eb025c7d86cc62b5a0d8af62" },
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "nord-vim": { "branch": "main", "commit": "1765ae6fde4a1e2cc9608025c67157564b5ec42c" },
+  "vim-airline": { "branch": "master", "commit": "512456e425409ec58627bd839fbb85d449d8cbc1" },
+  "vim-polyglot": { "branch": "master", "commit": "f061eddb7cdcc614c8406847b2bfb53099832a4e" },
+  "vim-wayland-clipboard": { "branch": "master", "commit": "08fd1383f80e33f7e77418404cddd34a121a6c19" }
+}
