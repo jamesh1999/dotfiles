@@ -15,11 +15,29 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -- ======================
 require("lazy").setup({
-  { "vim-airline/vim-airline" },
   { "chrisbra/Colorizer" },
-  { "sheerun/vim-polyglot" },
   { "jamesh1999/nord-vim" },
-  { "jasonccox/vim-wayland-clipboard" },
+
+  -- Statusline
+  {
+      "nvim-lualine/lualine.nvim",
+      config = function()
+        require("lualine").setup({
+          options = {
+            theme = "nord",
+            section_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
+          },
+        })
+      end
+  },
+
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false,
+  }
 })
 
 -- ======================
@@ -105,7 +123,6 @@ vim.cmd([[cnoreabbrev qw wq]])
 -- ======================
 -- Plugin configuration
 -- ======================
-vim.g.airline_powerline_fonts = 1
 vim.g.python_highlight_indent_errors = 1
 vim.g.python_highlight_space_errors = 1
 vim.g.cpp_class_decl_highlight = 1
