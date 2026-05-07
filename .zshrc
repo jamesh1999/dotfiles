@@ -68,11 +68,6 @@ killjobs () {
 
 }
 
-# No arguments: 'git status'
-# With arguments: like an alias of 'git'
-g() {
-  command git "${@:-status}"
-}
 
 # Run VS Code in the background
 # No arguments: 'code .'
@@ -107,6 +102,7 @@ alias ra='ranger'
 alias rcd='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"'
 alias dr='direnv reload'
 alias cls='clear'
+alias g='git'
 alias tm='tmux'
 alias lzd='lazydocker'
 alias lzg='lazygit'
