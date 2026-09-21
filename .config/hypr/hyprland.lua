@@ -29,8 +29,6 @@ local clipboard = "cliphist list | rofi -modi clipboard:cliphist-rofi-img.sh -sh
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpm reload -n")
 	hl.exec_cmd('tmux setenv -g HYPRLAND_INSTANCE_SIGNATURE "$HYPRLAND_INSTANCE_SIGNATURE"')
-
-	-- hl.exec_cmd("nm-applet")
 end)
 
 
@@ -51,10 +49,8 @@ hl.config({
 		resize_on_border = false,
 		allow_tearing = false,
 		layout = "dwindle",
-	}
-})
+	},
 
-hl.config({
 	decoration = {
 		rounding = 1,
 		rounding_power = 2,
@@ -80,10 +76,8 @@ hl.config({
 			ignore_opacity = true,
 			new_optimizations = true,
 		}
-	}
-})
+	},
 
-hl.config({
 	animations = {
 		enabled = true, -- yes, please :)
 	}
@@ -131,6 +125,8 @@ hl.config({
 hl.config({
 	misc = {
 		disable_hyprland_logo = true,
+		disable_splash_rendering = true,
+		initial_workspace_tracking = 2,
 		key_press_enables_dpms = true,
 	}
 })
@@ -217,28 +213,12 @@ hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
-hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = "1", on_current_monitor = true }))
-hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = "2", on_current_monitor = true }))
-hl.bind(mainMod .. " + 3", hl.dsp.focus({ workspace = "3", on_current_monitor = true }))
-hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = "4", on_current_monitor = true }))
-hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = "5", on_current_monitor = true }))
-hl.bind(mainMod .. " + 6", hl.dsp.focus({ workspace = "6", on_current_monitor = true }))
-hl.bind(mainMod .. " + 7", hl.dsp.focus({ workspace = "7", on_current_monitor = true }))
-hl.bind(mainMod .. " + 8", hl.dsp.focus({ workspace = "8", on_current_monitor = true }))
-hl.bind(mainMod .. " + 9", hl.dsp.focus({ workspace = "9", on_current_monitor = true }))
-hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = "10" }))
-
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
-hl.bind(mainMod .. " + SHIFT + 1", hl.dsp.window.move({ workspace = "1" }))
-hl.bind(mainMod .. " + SHIFT + 2", hl.dsp.window.move({ workspace = "2" }))
-hl.bind(mainMod .. " + SHIFT + 3", hl.dsp.window.move({ workspace = "3" }))
-hl.bind(mainMod .. " + SHIFT + 4", hl.dsp.window.move({ workspace = "4" }))
-hl.bind(mainMod .. " + SHIFT + 5", hl.dsp.window.move({ workspace = "5" }))
-hl.bind(mainMod .. " + SHIFT + 6", hl.dsp.window.move({ workspace = "6" }))
-hl.bind(mainMod .. " + SHIFT + 7", hl.dsp.window.move({ workspace = "7" }))
-hl.bind(mainMod .. " + SHIFT + 8", hl.dsp.window.move({ workspace = "8" }))
-hl.bind(mainMod .. " + SHIFT + 9", hl.dsp.window.move({ workspace = "9" }))
-hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = "10" }))
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+end
 
 -- Example special workspace
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
@@ -306,9 +286,3 @@ hl.layer_rule({ match = { namespace = "swaync-notification-window" }, blur = tru
 hl.layer_rule({ match = { namespace = "rofi" }, ignore_alpha = 0.5 })
 hl.layer_rule({ match = { namespace = "swaync-control-center" }, ignore_alpha = 0.5 })
 hl.layer_rule({ match = { namespace = "swaync-notification-window" }, ignore_alpha = 0.5 })
-
-hl.config({
-	debug = {
-		full_cm_proto = false,
-	}
-})
