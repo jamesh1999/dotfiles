@@ -106,6 +106,7 @@ alias g='git'
 alias tm='tmux'
 alias lzd='lazydocker'
 alias lzg='lazygit'
+alias nfc='nix flake check'
 
 # Prettier output
 alias ls='eza --icons=auto'

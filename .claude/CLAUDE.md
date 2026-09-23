@@ -2,4 +2,5 @@
 - Always try to match the style of the exising code.
 - Avoid excessive comments. Code should be self-documenting & comments either summarize a group of statements or provide clarity where something tricky is happening.
 - Try to use pop culture references for data in tests!
-
+- 'iff' means 'if-and-only-if'
+- **Never** run git command that modify the state without explicit permission. This means stash, add, reset, checkout... You can of course do read-only commands like log, reflog, diff...
