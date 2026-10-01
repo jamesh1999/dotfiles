@@ -216,7 +216,7 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i, on_current_monitor = true}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
