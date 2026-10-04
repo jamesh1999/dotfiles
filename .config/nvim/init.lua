@@ -3,11 +3,11 @@
 -- ======================
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath
-  })
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -15,47 +15,47 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -- ======================
 require("lazy").setup({
-  { "chrisbra/Colorizer" },
-  { "jamesh1999/nord-vim" },
+    { "chrisbra/Colorizer" },
+    { "jamesh1999/nord-vim" },
 
-  -- Statusline
-  {
-      "nvim-lualine/lualine.nvim",
-      config = function()
-        require("lualine").setup({
-          options = {
-            theme = "nord",
-            section_separators = { left = '', right = '' },
-            component_separators = { left = '', right = '' },
-          },
-        })
-      end
-  },
+    -- Statusline
+    {
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            require("lualine").setup({
+                options = {
+                theme = "nord",
+                section_separators = { left = '', right = '' },
+                component_separators = { left = '', right = '' },
+                },
+            })
+        end
+    },
 
-  -- Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    config = function()
-      local ts = require("nvim-treesitter")
-      local languages = { "python" , "rust", "cpp" }
+    -- Treesitter
+    {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            local ts = require("nvim-treesitter")
+            local languages = { "python" , "rust", "cpp" }
 
-      ts.setup({})
-      ts.install(languages)
+            ts.setup({})
+            ts.install(languages)
 
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "lua", "python", "rust", "cpp" },
-        callback = function()
-          vim.treesitter.start()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "lua", "python", "rust", "cpp" },
+                callback = function()
+                vim.treesitter.start()
+                end,
+            })
         end,
-      })
-    end,
-    build = ":TSUpdate",
-    lazy = false,
-  },
+        build = ":TSUpdate",
+        lazy = false,
+    },
 
-  { 
-    "HiPhish/rainbow-delimiters.nvim",
-    config = function()
+    { 
+        "HiPhish/rainbow-delimiters.nvim",
+        config = function()
         require('rainbow-delimiters.setup').setup({
             highlight = {
                 'RainbowDelimiterRed',
@@ -67,14 +67,46 @@ require("lazy").setup({
                 'RainbowDelimiterCyan',
             },
         })
-    end
-  },
+        end
+    },
+
+    -- Git status
+    { "lewis6991/gitsigns.nvim" },
+
+    -- Oil file explorer
+    {
+        "stevearc/oil.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require('oil').setup()
+        end,
+        lazy = false,
+    },
+
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+        keys = {
+            {
+            "<leader>?",
+            function()
+                require("which-key").show({ global = false })
+            end,
+            desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    }
 })
 
 -- ======================
 -- Colour setup
 -- ======================
-vim.opt.termguicolors = false
+vim.opt.termguicolors = false  -- Consider enabling in future
 vim.cmd.colorscheme("nord")
 
 -- ======================
@@ -90,7 +122,6 @@ opt.incsearch = true
 opt.magic = true
 opt.number = true
 opt.relativenumber = true
-opt.swapfile = false
 opt.splitbelow = true
 opt.splitright = true
 opt.visualbell = true
@@ -108,19 +139,16 @@ opt.scrolloff = 4
 -- ======================
 local keymap = vim.keymap.set
 
--- Clear search highlight
-keymap("n", "<Esc>", ":noh<CR>")
-
--- Insert jj to escape
-keymap("i", "jj", "<Esc>")
+keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", {desc = "Clear search highlighting"})
+keymap("i", "jj", "<Esc>", {desc = "Insert jj to escape"})
 
 -- Disable arrow keys
 local modes = { "n", "i" }
 for _, mode in ipairs(modes) do
-  keymap(mode, "<left>", "<nop>")
-  keymap(mode, "<right>", "<nop>")
-  keymap(mode, "<up>", "<nop>")
-  keymap(mode, "<down>", "<nop>")
+    keymap(mode, "<left>", "<nop>")
+    keymap(mode, "<right>", "<nop>")
+    keymap(mode, "<up>", "<nop>")
+    keymap(mode, "<down>", "<nop>")
 end
 
 -- Better regex
@@ -150,6 +178,9 @@ vim.api.nvim_create_user_command("W", function()
 end, {})
 
 vim.cmd([[cnoreabbrev qw wq]])
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- ======================
 -- Plugin configuration
