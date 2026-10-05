@@ -11,6 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+-- Set leader key first
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+
 -- ======================
 -- Plugins
 -- ======================
@@ -73,14 +79,15 @@ require("lazy").setup({
     -- Git status
     { "lewis6991/gitsigns.nvim" },
 
-    -- Oil file explorer
+    -- Ranger file explorer
     {
-        "stevearc/oil.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        "kevinhwang91/rnvimr",
         config = function()
-            require('oil').setup()
+            vim.g.rnvimr_enable_ex = 1
+            vim.g.rnvimr_enable_picker = 1
+            vim.g.rnvimr_enable_bw = 1
+            vim.keymap.set("n", "<leader>e", "<cmd>RnvimrToggle<CR>", {desc="Open file explorer"})
         end,
-        lazy = false,
     },
 
     {
@@ -133,6 +140,7 @@ opt.expandtab = true
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.scrolloff = 4
+opt.signcolumn = "yes"
 
 -- ======================
 -- Keybinds
@@ -178,9 +186,6 @@ vim.api.nvim_create_user_command("W", function()
 end, {})
 
 vim.cmd([[cnoreabbrev qw wq]])
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- ======================
 -- Plugin configuration
