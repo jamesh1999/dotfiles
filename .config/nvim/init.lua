@@ -6,6 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git", "clone", "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
         lazypath
     })
 end
@@ -16,23 +17,55 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.termguicolors = true
+
 
 -- ======================
 -- Plugins
 -- ======================
 require("lazy").setup({
-    { "chrisbra/Colorizer" },
+    {
+        "catgoose/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup({})
+        end
+    },
     { "jamesh1999/nord-vim" },
 
     -- Statusline
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
+            local custom_nord = require("lualine.themes.nord");
+            custom_nord.normal.a = { bg = "#81A1C1", fg = "#3B4252", gui = "bold"};
+            custom_nord.insert.a = { bg = "#FDB674", fg = "#3B4252", gui = "bold"};
+            custom_nord.visual.a = { bg = "#88C0D0", fg = "#3B4252", gui = "bold"};
+            custom_nord.replace.a = { bg = "#ECEFF4", fg = "#3B4252", gui = "bold"};
+            custom_nord.inactive.a = { bg = "#FDB674", fg = "#3B4252", gui = "bold"};
+
+            custom_nord.normal.b = { bg = "#4C566A", fg = "#E5E9F0"};
+            custom_nord.insert.b = { bg = "#4C566A", fg = "#E5E9F0"};
+            custom_nord.visual.b = { bg = "#4C566A", fg = "#E5E9F0"};
+            custom_nord.replace.b = { bg = "#4C566A", fg = "#E5E9F0"};
+            custom_nord.inactive.b = { bg = "#4C566A", fg = "#E5E9F0"};
+
+            custom_nord.normal.c = { bg = "#3B4252", fg = "#E5E9F0"};
+            custom_nord.insert.c = { bg = "#3B4252", fg = "#E5E9F0"};
+            custom_nord.visual.c = { bg = "#3B4252", fg = "#E5E9F0"};
+            custom_nord.replace.c = { bg = "#3B4252", fg = "#E5E9F0"};
+            custom_nord.inactive.c = { bg = "#3B4252", fg = "#E5E9F0"};
+
             require("lualine").setup({
                 options = {
-                theme = "nord",
-                section_separators = { left = '', right = '' },
-                component_separators = { left = '', right = '' },
+                    theme = custom_nord,
+                    section_separators = { left = '', right = '' },
+                    component_separators = { left = '', right = '' },
+                },
+                sections = {
+                    lualine_x = { "filetype" },
+                    lualine_y = { "encoding", "fileformat" },
+                    lualine_z = { "location" },
                 },
             })
         end
@@ -97,6 +130,18 @@ require("lazy").setup({
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
+            win = {
+                border = {
+                    { '┌', 'FloatBorder' },
+                    { '─', 'FloatBorder' },
+                    { '┐', 'FloatBorder' },
+                    { '│', 'FloatBorder' },
+                    { '┘', 'FloatBorder' },
+                    { '─', 'FloatBorder' },
+                    { '└', 'FloatBorder' },
+                    { '│', 'FloatBorder' },
+                },
+            },
         },
         keys = {
             {
@@ -111,14 +156,12 @@ require("lazy").setup({
 })
 
 -- ======================
--- Colour setup
--- ======================
-vim.opt.termguicolors = false  -- Consider enabling in future
-vim.cmd.colorscheme("nord")
-
--- ======================
 -- Settings
 -- ======================
+vim.cmd.colorscheme("nord")
+vim.api.nvim_set_hl(0, 'Normal', { fg = "NONE", bg = "NONE" })
+vim.api.nvim_set_hl(0, 'SignColumn', { fg = "NONE", bg = "NONE" })
+
 local opt = vim.opt
 
 opt.hidden = true
@@ -141,6 +184,9 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.scrolloff = 4
 opt.signcolumn = "yes"
+opt.wrap = false
+opt.sidescrolloff = 8
+
 
 -- ======================
 -- Keybinds
