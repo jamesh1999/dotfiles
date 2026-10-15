@@ -26,8 +26,8 @@ export MANPAGER='less -M +Gg'
 
 export BAT_THEME='Nord'
 
-export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,pointer:4,spinner:13 --prompt='❯❯ ' --no-separator --highlight-line --layout=reverse-list"
-export FZF_CTRL_T_OPTS="--preview='bat -n --color=always {}' --walker-skip .git,.direnv,.venv"
+export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,pointer:4,spinner:13 --prompt='❯❯ ' --no-separator --highlight-line --layout=reverse-list --border=sharp"
+export FZF_CTRL_T_OPTS="--preview='bat -n --color=always {}' --walker-skip .git,.direnv,.venv --preview-border=sharp"
 
 export PATH=/home/james/.opencode/bin:$PATH
 
