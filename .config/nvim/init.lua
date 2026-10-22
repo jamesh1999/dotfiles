@@ -173,6 +173,17 @@ require("lazy").setup({
             desc = "Buffer Local Keymaps (which-key)",
             },
         },
+    },
+    {
+        "mason-org/mason.nvim",
+        opts = {}
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            vim.lsp.enable("basedpyright")
+            vim.lsp.enable("rust-analyzer")
+        end
     }
 })
 
@@ -253,6 +264,13 @@ vim.api.nvim_create_user_command("W", function()
 end, {})
 
 vim.cmd([[cnoreabbrev qw wq]])
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {'*.md'},
+  callback = function(ev)
+    vim.opt_local.wrap = true
+  end
+})
 
 -- ======================
 -- Plugin configuration
