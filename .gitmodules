@@ -1,0 +1,3 @@
+[submodule ".local/share/icons/mcmojave-hyprcursor"]
+	path = .local/share/icons/mcmojave-hyprcursor
+	url = git@github.com:Libadoxon/mcmojave-hyprcursor.git
