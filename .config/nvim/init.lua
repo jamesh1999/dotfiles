@@ -255,6 +255,10 @@ keymap("i", "<C-l>", "<C-w>l")
 keymap("i", "<C-j>", "<C-w>j")
 keymap("i", "<C-k>", "<C-w>k")
 
+-- Split creation
+keymap("n", "<leader>v", "<C-w>v", {desc = "Vertical split"})
+keymap("n", "<leader>h", "<C-w>s", {desc = "Horizontal split"})
+
 -- ======================
 -- Commands
 -- ======================
