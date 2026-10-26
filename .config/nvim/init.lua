@@ -182,7 +182,35 @@ require("lazy").setup({
         "neovim/nvim-lspconfig",
         config = function()
             vim.lsp.enable("basedpyright")
+            vim.lsp.enable("clangd")
             vim.lsp.enable("rust-analyzer")
+        end
+    },
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+        },
+        config = function()
+            local cmp = require("cmp")
+            cmp.setup({
+                mapping = cmp.mapping.preset.insert({
+                    -- Enter to confirm completion
+                    ["<CR>"] = cmp.mapping.confirm({select = false}),
+
+                    -- Ctrl+Space to open completions
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                }),
+
+                sources = {
+                    { name="nvim_lsp" },
+                },
+
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                }
+            })
         end
     }
 })
@@ -218,6 +246,7 @@ opt.scrolloff = 4
 opt.signcolumn = "yes"
 opt.wrap = false
 opt.sidescrolloff = 8
+opt.pumheight = 10
 
 
 -- ======================
