@@ -36,3 +36,5 @@ keymap("i", "<C-k>", "<C-w>k")
 -- Split creation
 keymap("n", "<leader>v", "<C-w>v", {desc = "Vertical split"})
 keymap("n", "<leader>h", "<C-w>s", {desc = "Horizontal split"})
+
+keymap("n", "gre", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show error / warning", silent = true })
