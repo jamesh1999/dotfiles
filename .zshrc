@@ -115,6 +115,7 @@ alias grep='grep --color=auto'
 alias df='df --human-readable --print-type'
 alias du='du --human-readable --total'
 
+alias vim='nvim'
 alias sudo='sudo ' # Make 'sudo {alias}' work
 alias exitf='killjobs; exit'
 alias myip='curl http://ipecho.net/plain; echo'

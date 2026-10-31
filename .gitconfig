@@ -21,11 +21,11 @@
 
 # VSCode for diff/merge
 [diff]
-  tool = vscode
+  tool = nvimdiff
 [difftool "vscode"]
   cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
-  tool = vscode
+  tool = nvimdiff
 [mergetool "vscode"]
   cmd = code --wait $MERGED
 

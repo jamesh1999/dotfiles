@@ -45,6 +45,7 @@ require("lazy").setup({
     require("plugins.telescope"),
     require("plugins.which_key"),
     require("plugins.mason"),
+    require("plugins.render_markdown"),
 
     -- LSP + completion (tightly coupled plugins)
     require("plugins.lsp"),
