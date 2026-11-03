@@ -37,6 +37,7 @@ require("lazy").setup({
     { "jamesh1999/nord-vim" },
 
     require("plugins.colorizer"),
+    require("plugins.todo"),
     require("plugins.lualine"),
     require("plugins.treesitter"),
     require("plugins.rainbow"),
