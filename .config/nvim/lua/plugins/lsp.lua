@@ -67,10 +67,10 @@ return {
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
-                    nvim.keymap.set("n", "grd", vim.lsp.buf.definition,
+                    vim.keymap.set("n", "grd", vim.lsp.buf.definition,
                          { desc = "Go to definition", silent = true })
 
-                    nvim.keymap.set("n", "gre", vim.diagnostic.open_float,
+                    vim.keymap.set("n", "gre", vim.diagnostic.open_float,
                          { desc = "Show error / warning", silent = true })
                 end,
             })
