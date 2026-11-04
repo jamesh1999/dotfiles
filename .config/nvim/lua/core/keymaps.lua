@@ -15,6 +15,10 @@ for _, mode in ipairs(modes) do
     keymap(mode, "<down>", "<nop>")
 end
 
+-- Easier C-d, C-u to follow
+keymap("n", "<C-u>", "<C-u>zz")
+keymap("n", "<C-d>", "<C-d>zz")
+
 -- Better regex
 keymap("n", "/", "/\\v")
 keymap("v", "/", "/\\v")
