@@ -12,7 +12,6 @@ opt.incsearch = true
 opt.inccommand = "split"
 opt.magic = true
 opt.number = true
-opt.relativenumber = true
 opt.splitbelow = true
 opt.splitright = true
 opt.visualbell = true
