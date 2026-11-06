@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tmp_dir="/tmp/cliphist"
+tmp_dir="${XDG_RUNTIME_DIR:?}/cliphist"
 rm -rf "$tmp_dir"
 
 if [[ -n "$1" ]]; then

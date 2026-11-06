@@ -4,18 +4,14 @@
 local opt = vim.opt
 
 opt.termguicolors = true
-opt.hidden = true
-opt.hlsearch = true
 opt.ignorecase = true
 opt.smartcase = true
-opt.incsearch = true
 opt.inccommand = "split"
 opt.magic = true
 opt.number = true
 opt.splitbelow = true
 opt.splitright = true
 opt.visualbell = true
-opt.wildmenu = true
 opt.ruler = false
 opt.showmode = false
 opt.clipboard = "unnamedplus"

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Get branches marked as [gone]
-to_delete=$(git branch -vv | grep 'gone\]' | awk '{print $1}')
+to_delete=$(git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads | awk '$2 == "[gone]" { print $1 }')
 
 # If no branches to delete
 if [[ -z "$to_delete" ]]; then

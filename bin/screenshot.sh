@@ -13,6 +13,7 @@ while getopts "u" flag; do
 done
 
 hyprpicker -r -z &
+trap 'killall -q hyprpicker' EXIT
 sleep .3
 
 rect=$(slurp)

@@ -12,12 +12,12 @@ git branch --format='%(refname:short)' >"$tmpfifo" &
 (
   git fetch --quiet origin >/dev/null 2>&1
   git for-each-ref --format='%(refname)' refs/remotes \
-    | sed 's#^refs/remotes/[^/]*/##'
+    | sed -e '\#/HEAD$#d' -e 's#^refs/remotes/[^/]*/##'
 ) >>"$tmpfifo" &
 
 # Read and deduplicate
 branch=$(awk '!seen[$0]++ { print; fflush() }' <"$tmpfifo" | fzf)
 [ -z "$branch" ] && exit 0
 
-git checkout "$branch" 2>/dev/null
+git checkout "$branch"
 

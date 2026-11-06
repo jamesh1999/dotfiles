@@ -32,10 +32,6 @@ keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-l>", "<C-w>l")
 keymap("n", "<C-j>", "<C-w>j")
 keymap("n", "<C-k>", "<C-w>k")
-keymap("i", "<C-h>", "<C-w>h")
-keymap("i", "<C-l>", "<C-w>l")
-keymap("i", "<C-j>", "<C-w>j")
-keymap("i", "<C-k>", "<C-w>k")
 
 -- Split creation
 keymap("n", "<leader>v", "<C-w>v", {desc = "Vertical split"})

@@ -3,10 +3,15 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        dependencies = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
+            vim.lsp.config("*", {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            })
+
             vim.lsp.enable("basedpyright")
             vim.lsp.enable("clangd")
-            vim.lsp.enable("rust-analyzer")
+            vim.lsp.enable("rust_analyzer")
         end
     },
     {
@@ -25,7 +30,6 @@ return {
                 formatting = {
                     fields = { "icon", "abbr", "menu", "kind" },
                     format = function(entry, vim_item)
-                        local lspkind = require("lspkind")
                         local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
                         kind.icon = " " .. (kind.icon or "") .. "  "
                         kind.kind = "   (" .. (kind.kind or "") .. ")"
@@ -97,10 +101,10 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
                     vim.keymap.set("n", "grd", vim.lsp.buf.definition,
-                         { desc = "Go to definition", silent = true })
+                         { buffer = event.buf, desc = "Go to definition", silent = true })
 
                     vim.keymap.set("n", "gre", vim.diagnostic.open_float,
-                         { desc = "Show error / warning", silent = true })
+                         { buffer = event.buf, desc = "Show error / warning", silent = true })
                 end,
             })
         end
