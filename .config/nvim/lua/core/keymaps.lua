@@ -40,3 +40,15 @@ keymap("i", "<C-k>", "<C-w>k")
 -- Split creation
 keymap("n", "<leader>v", "<C-w>v", {desc = "Vertical split"})
 keymap("n", "<leader>h", "<C-w>s", {desc = "Horizontal split"})
+
+-- Open terminal in bottom split
+keymap("n", "<leader>t", function()
+  vim.cmd("botright split")
+  vim.cmd("resize 15")
+  vim.cmd("terminal")
+end, { desc = "Open terminal" })
+
+-- Exit terminal mode with Esc
+keymap("t", "<Esc>", [[<C-\><C-n>]], {
+  desc = "Exit terminal mode",
+})

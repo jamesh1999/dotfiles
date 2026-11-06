@@ -14,3 +14,5 @@ _prepend_path() {
 _prepend_path "$HOME/bin"
 _prepend_path "$HOME/.local/bin"
 _prepend_path "$HOME/.opencode/bin"
+
+unset -f _prepend_path

@@ -47,6 +47,7 @@ require("lazy").setup({
     require("plugins.which_key"),
     require("plugins.mason"),
     require("plugins.render_markdown"),
+    require("plugins.hex"),
 
     -- LSP + completion (tightly coupled plugins)
     require("plugins.lsp"),
