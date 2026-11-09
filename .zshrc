@@ -28,6 +28,7 @@ export BAT_THEME='Nord'
 
 export FZF_DEFAULT_OPTS="--tmux bottom,100%,40% --color=hl:13,hl+:13,info:4,pointer:4,spinner:13 --prompt='❯❯ ' --no-separator --highlight-line --layout=reverse-list --border=sharp"
 export FZF_CTRL_T_OPTS="--preview='bat -n --color=always {}' --walker-skip .git,.direnv,.venv --preview-border=sharp"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --icons=always --color=always {}' --walker-skip .git,.direnv,.venv --preview-border=sharp"
 
 export ZVM_INIT_MODE=sourcing  # Prevents zvm overriding other keybindings
 
@@ -46,6 +47,7 @@ setopt share_history
 setopt hist_verify
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
+setopt interactive_comments
 
 
 
@@ -133,15 +135,17 @@ eval "$(zoxide init --cmd cd zsh)"
 # Keybinds
 # --------
 bindkey '^ ' autosuggest-accept # ctrl+space
-bindkey '^[[A' history-search-backward # up arrow
-bindkey '^[[B' history-search-forward # down arrow
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 
 
 
 # Completions
 # -----------
-# Initialise completions as late as possible - we don't want anything modifying completions after this
-autoload -Uz compinit; compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 compdef g='git'
 compdef tm='tmux'
