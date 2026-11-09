@@ -190,7 +190,7 @@ hl.device({
 local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("powermenu.sh"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind("PRINT", hl.dsp.exec_cmd("screenshot.sh"))
 hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("screenshot.sh -u"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprpicker -a"))

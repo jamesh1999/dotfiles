@@ -26,7 +26,7 @@ case "$chosen" in
         ;;
 
     "$lock")
-		hyprlock
+		loginctl lock-session
         ;;
 
     "$suspend")
