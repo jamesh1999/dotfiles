@@ -24,3 +24,4 @@ opt.signcolumn = "yes"
 opt.wrap = false
 opt.sidescrolloff = 8
 opt.pumheight = 10
+opt.undofile = true

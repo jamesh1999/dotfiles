@@ -100,8 +100,23 @@ return {
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
-                    vim.keymap.set("n", "grd", vim.lsp.buf.definition,
+                    local builtin = require("telescope.builtin")
+
+                    -- Override Neovim's default LSP maps to use Telescope instead of the quickfix list
+                    vim.keymap.set("n", "grd", builtin.lsp_definitions,
                          { buffer = event.buf, desc = "Go to definition", silent = true })
+
+                    vim.keymap.set("n", "grr", builtin.lsp_references,
+                         { buffer = event.buf, desc = "Find references", silent = true })
+
+                    vim.keymap.set("n", "gri", builtin.lsp_implementations,
+                         { buffer = event.buf, desc = "Find implementations", silent = true })
+
+                    vim.keymap.set("n", "grt", builtin.lsp_type_definitions,
+                         { buffer = event.buf, desc = "Go to type definition", silent = true })
+
+                    vim.keymap.set("n", "gO", builtin.lsp_document_symbols,
+                         { buffer = event.buf, desc = "Document symbols", silent = true })
 
                     vim.keymap.set("n", "gre", vim.diagnostic.open_float,
                          { buffer = event.buf, desc = "Show error / warning", silent = true })
