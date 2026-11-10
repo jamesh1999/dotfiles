@@ -1,0 +1,10 @@
+gui:
+  border: single
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    selectedLineBgColor:
+      - black
+    optionsTextColor:
+      - blue

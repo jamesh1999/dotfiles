@@ -1,0 +1,28 @@
+notARepository: quit
+
+gui:
+  nerdFontsVersion: "3"
+  border: single
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    searchingActiveBorderColor:
+      - magenta
+      - bold
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - black
+    inactiveViewSelectedLineBgColor:
+      - black
+    cherryPickedCommitFgColor:
+      - cyan
+    cherryPickedCommitBgColor:
+      - black
+    markedBaseCommitFgColor:
+      - cyan
+    markedBaseCommitBgColor:
+      - black
+    unstagedChangesColor:
+      - red
