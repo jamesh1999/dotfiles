@@ -48,6 +48,7 @@ require("lazy").setup({
     require("plugins.mason"),
     require("plugins.render_markdown"),
     require("plugins.hex"),
+    require("plugins.tmux_navigator"),
 
     -- LSP + completion (tightly coupled plugins)
     require("plugins.lsp"),
