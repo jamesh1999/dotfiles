@@ -19,16 +19,12 @@
 [branch]
 	sort = -committerdate
 
-# VSCode for diff/merge
 [diff]
   tool = nvimdiff
-[difftool "vscode"]
-  cmd = code --wait --diff $LOCAL $REMOTE
+  algorithm = histogram
 [merge]
   tool = nvimdiff
   conflictStyle = zdiff3
-[mergetool "vscode"]
-  cmd = code --wait $MERGED
 
 # Use SSH always
 [url "git@github.com:"]
