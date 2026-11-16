@@ -1,162 +1,119 @@
 #!/usr/bin/env bash
 # Powerline-style statusline for Claude Code
 
+# Colours as terminal palette numbers: 0-7 normal, 8-15 bright
+SECTION_A_BG=5
+SECTION_A_FG=0
+SECTION_B_BG=8
+SECTION_B_FG=7
+SECTION_C_BG=0
+SECTION_C_FG=7
+
+# Columns kept clear at the right edge for Claude Code's own UI
+RIGHT_MARGIN=4
+
 # Read JSON input
 input=$(cat)
 
 # Powerline separator characters
-SEP=""
-SEP_THIN=""
+SEP_LEFT=$''
+SEP_RIGHT=$''
 
-# ANSI colour codes (for 256-colour terminals)
-# Background colours
-BG_BLUE="\033[48;5;33m"
-BG_GREEN="\033[48;5;28m"
-BG_YELLOW="\033[48;5;136m"
-BG_RED="\033[48;5;160m"
-BG_GREY="\033[48;5;240m"
-BG_DARK_GREY="\033[48;5;236m"
-BG_ORANGE="\033[48;5;166m"
+export GIT_OPTIONAL_LOCKS=0
+export LC_ALL=C.UTF-8
 
-# Foreground colours (for separators)
-FG_BLUE="\033[38;5;33m"
-FG_GREEN="\033[38;5;28m"
-FG_YELLOW="\033[38;5;136m"
-FG_RED="\033[38;5;160m"
-FG_GREY="\033[38;5;240m"
-FG_DARK_GREY="\033[38;5;236m"
-FG_ORANGE="\033[38;5;166m"
+fg_code() { printf '%d' "$(($1 < 8 ? 30 + $1 : 82 + $1))"; }
+bg_code() { printf '%d' "$(($1 < 8 ? 40 + $1 : 92 + $1))"; }
+BG=("$SECTION_A_BG" "$SECTION_B_BG" "$SECTION_C_BG")
+FG=("$SECTION_A_FG" "$SECTION_B_FG" "$SECTION_C_FG")
+ATTR=("0;1" "0" "0")
+SECTION_C=2
 
-# Text colours
-FG_WHITE="\033[38;5;255m"
-FG_BLACK="\033[38;5;16m"
+sgr() { printf '\e[%sm' "$1"; }
 
-RESET="\033[0m"
-BOLD="\033[1m"
+visible_width() {
+    printf '%s' "$1" | sed 's/\x1b\[[0-9;]*m//g' | LC_ALL=C.UTF-8 wc -m
+}
 
-# Initialize output
-left=""
-right=""
-
-# Segment 1: Claude mode/agent (blue background)
-mode_text="Claude"
-agent_name=$(echo "$input" | jq -r '.agent.name // empty')
-if [ -n "$agent_name" ]; then
-    mode_text="$agent_name"
-fi
-
-vim_mode=$(echo "$input" | jq -r '.vim.mode // empty')
-if [ -n "$vim_mode" ]; then
-    mode_text="$mode_text [$vim_mode]"
-fi
-
-left="${left}${BG_BLUE}${FG_WHITE}${BOLD} ${mode_text} ${RESET}"
-
-# Segment 2: Directory (grey background)
-current_dir=$(echo "$input" | jq -r '.workspace.current_dir')
-display_dir=${current_dir/#$HOME/\~}
-
-# Abbreviate to max depth 2
-IFS='/' read -ra path_parts <<< "$display_dir"
-path_count=${#path_parts[@]}
-
-if [ "$path_count" -le 2 ]; then
-    display_dir="$display_dir"
-else
-    display_dir=".../${path_parts[$((path_count-2))]}/${path_parts[$((path_count-1))]}"
-fi
-
-left="${left}${FG_BLUE}${BG_GREY}${SEP}${RESET}"
-left="${left}${BG_GREY}${FG_WHITE} ${display_dir} ${RESET}"
-
-# Segment 3: Git branch (colour-coded by status)
-git_bg=""
-git_fg=""
-git_text=""
-
-if git --git-dir="$current_dir/.git" rev-parse --git-dir >/dev/null 2>&1; then
-    cd "$current_dir" 2>/dev/null || true
-
-    ref=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
-
-    # First 3 chars of HEAD
-    head_prefix=$(printf "%.3s" "$ref")
-
-    # If ref contains "/", take last part and abbreviate to 12 chars
-    if [[ "$ref" == *"/"* ]]; then
-        ref_suffix=$(basename "$ref")
-        ref_suffix=$(printf "%.12s" "$ref_suffix")
-        branch="${head_prefix}${ref_suffix}"
-    else
-        branch=$(printf "%.12s" "$ref")
-    fi
-
-    # Determine colour based on git status (skip optional locks)
-    if git --no-optional-locks diff --quiet 2>/dev/null && \
-       git --no-optional-locks diff --cached --quiet 2>/dev/null; then
-        # Clean working tree - check ahead/behind status
-        ahead_behind=$(git rev-list --left-right --count @{u}...HEAD 2>/dev/null || echo "0 0")
-        behind=$(echo "$ahead_behind" | awk '{print $1}')
-        ahead=$(echo "$ahead_behind" | awk '{print $2}')
-
-        if [ "$behind" -gt 0 ] && [ "$ahead" -gt 0 ]; then
-            git_bg="$BG_RED"
-            git_fg="$FG_RED"
-        elif [ "$behind" -gt 0 ] || [ "$ahead" -gt 0 ]; then
-            git_bg="$BG_DARK_GREY"
-            git_fg="$FG_DARK_GREY"
-        else
-            git_bg="$BG_GREEN"
-            git_fg="$FG_GREEN"
+# Left segments run a, b; the last separator opens the section c bar
+render_left() {
+    local out="" prev="" i
+    for i in "${!left_segments[@]}"; do
+        if [ -n "$prev" ]; then
+            out+="$(sgr "0;$(fg_code "${BG[prev]}");$(bg_code "${BG[i]}")")${SEP_LEFT}"
         fi
-    else
-        git_bg="$BG_YELLOW"
-        git_fg="$FG_YELLOW"
-    fi
+        out+="$(sgr "${ATTR[i]};$(fg_code "${FG[i]}");$(bg_code "${BG[i]}")") ${left_segments[i]} "
+        prev=$i
+    done
+    out+="$(sgr "0;$(fg_code "${BG[prev]}");$(bg_code "${BG[SECTION_C]}")")${SEP_LEFT}"
+    printf '%s' "$out"
+}
 
-    git_text=" $branch"
+# Right segments end on section a, working back through b; the first separator closes the section c bar
+render_right() {
+    local out="" prev=$SECTION_C j s count=${#right_segments[@]}
+    for j in "${!right_segments[@]}"; do
+        s=$((count - 1 - j))
+        out+="$(sgr "0;$(fg_code "${BG[s]}");$(bg_code "${BG[prev]}")")${SEP_RIGHT}"
+        out+="$(sgr "${ATTR[s]};$(fg_code "${FG[s]}");$(bg_code "${BG[s]}")") ${right_segments[j]} "
+        prev=$s
+    done
+    printf '%s%s' "$out" "$(sgr 0)"
+}
 
-    left="${left}${FG_GREY}${git_bg}${SEP}${RESET}"
-    left="${left}${git_bg}${FG_BLACK}${BOLD}${git_text} ${RESET}"
-    left="${left}${git_fg}${SEP}${RESET}"
+# Section c bar: the branch fills the given width, truncated only when it doesn't fit
+render_bar() {
+    local width=$1 text="" pad
+    [ -n "$branch" ] && text=" ${branch_icon} ${branch}"
+    [ "${#text}" -gt "$((width - 1))" ] && text=${text:0:$((width > 1 ? width - 1 : 0))}
+    pad=$((width - ${#text}))
+    printf '%s%s%*s' "$(sgr "${ATTR[SECTION_C]};$(fg_code "${FG[SECTION_C]}");$(bg_code "${BG[SECTION_C]}")")" "$text" "$pad" ""
+}
+
+mapfile -t fields < <(jq -r '
+    .model.display_name // "Claude",
+    .workspace.repo.name // "",
+    .workspace.current_dir // .cwd // "",
+    .effort.level // "",
+    (.context_window.used_percentage // "" | if . == "" then "" else round | tostring end)
+' <<< "$input")
+model=${fields[0]}
+repo=${fields[1]}
+cwd=${fields[2]}
+effort=${fields[3]}
+context_used=${fields[4]}
+
+if [ -n "$repo" ]; then
+    location=$repo
+elif [ "$cwd" = "$HOME" ]; then
+    location="~"
 else
-    left="${left}${FG_GREY}${SEP}${RESET}"
+    location=${cwd##*/}
 fi
 
-# Right side: Context usage
-remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
-if [ -n "$remaining" ]; then
-    # Determine colour based on remaining percentage
-    if (( $(echo "$remaining < 20" | bc -l) )); then
-        ctx_bg="$BG_RED"
-        ctx_fg="$FG_RED"
-    elif (( $(echo "$remaining < 50" | bc -l) )); then
-        ctx_bg="$BG_ORANGE"
-        ctx_fg="$FG_ORANGE"
-    else
-        ctx_bg="$BG_GREEN"
-        ctx_fg="$FG_GREEN"
-    fi
+branch=$(git -C "$cwd" symbolic-ref --quiet --short HEAD 2>/dev/null \
+    || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+branch=${branch#*/}
 
-    # Format percentage to 1 decimal place
-    remaining_fmt=$(printf "%.1f" "$remaining")
+left_segments=("$model")
+[ -n "$location" ] && left_segments+=("$location")
+branch_icon=$''
 
-    right="${ctx_fg}${SEP}${RESET}"
-    right="${right}${ctx_bg}${FG_WHITE}${BOLD} ${remaining_fmt}% ${RESET}"
-fi
+right_segments=()
+case "$effort" in
+    xhigh) effort="Extra High" ;;
+    *) effort=${effort^} ;;
+esac
+[ -n "$effort" ] && right_segments+=("$effort")
+[ -n "$context_used" ] && right_segments+=("${context_used}%")
 
-# Calculate padding
-term_width=$(tput cols 2>/dev/null || echo 80)
-# Strip ANSI codes to calculate actual display width
-left_width=$(echo -e "$left" | sed 's/\x1b\[[0-9;]*m//g' | wc -c)
-right_width=$(echo -e "$right" | sed 's/\x1b\[[0-9;]*m//g' | wc -c)
-padding_width=$((term_width - left_width - right_width + 2))
+left=$(render_left)
+right=""
+[ "${#right_segments[@]}" -gt 0 ] && right=$(render_right)
 
-if [ "$padding_width" -lt 0 ]; then
-    padding_width=0
-fi
+term_width=$(stty size < /dev/tty 2>/dev/null | cut -d' ' -f2)
+term_width=${term_width:-${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}}
+bar_width=$((term_width - RIGHT_MARGIN - $(visible_width "$left") - $(visible_width "$right")))
+[ "$bar_width" -lt 0 ] && bar_width=0
 
-padding=$(printf '%*s' "$padding_width" '')
-
-# Output final statusline
-printf "%b%s%b\n" "$left" "$padding" "$right"
+printf '%s%s%s\n' "$left" "$(render_bar "$bar_width")" "$right"
