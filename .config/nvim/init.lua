@@ -38,6 +38,7 @@ require("lazy").setup({
 
     require("plugins.colorizer"),
     require("plugins.todo"),
+    require("plugins.commentary"),
     require("plugins.lualine"),
     require("plugins.treesitter"),
     require("plugins.rainbow"),
