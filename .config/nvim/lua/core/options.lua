@@ -1,27 +1,31 @@
 -- ======================
 -- Options
 -- ======================
-local opt = vim.opt
 
-opt.termguicolors = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.inccommand = "split"
-opt.magic = true
-opt.number = true
-opt.splitbelow = true
-opt.splitright = true
-opt.visualbell = true
-opt.ruler = false
-opt.showmode = false
-opt.clipboard = "unnamedplus"
-opt.expandtab = true
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.scrolloff = 4
-opt.signcolumn = "yes"
-opt.wrap = false
-opt.sidescrolloff = 8
-opt.pumheight = 10
-opt.undofile = true
+vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split"
+vim.opt.magic = true
+vim.opt.number = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.visualbell = true
+vim.opt.ruler = false
+vim.opt.showmode = false
+vim.opt.clipboard = "unnamedplus"
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.scrolloff = 4
+vim.opt.signcolumn = "yes"
+vim.opt.wrap = false
+vim.opt.sidescrolloff = 8
+vim.opt.pumheight = 10
+vim.opt.undofile = true
+
+vim.diagnostic.config({
+    severity_sort = true,
+    virtual_text = { current_line = true }
+})
