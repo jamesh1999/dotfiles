@@ -13,5 +13,8 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "alwaysThinkingEnabled": false,
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "editorMode": "vim",
+  "vimInsertModeRemaps": { "jj": "<Esc>" },
+  "preferredNotifChannel": "terminal_bell"
 }
