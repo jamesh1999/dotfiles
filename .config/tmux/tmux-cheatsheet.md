@@ -70,6 +70,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 - Detach: `Prefix + d`
 - Restore session: `Prefix + CTRL + r`
 - Install plugins: `Prefix + I`
+- Update plugins: `Prefix + U`
 
 ## Useful Snippets
 
