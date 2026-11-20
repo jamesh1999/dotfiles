@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "nord",
+    "mode": "system"
+  },
+  "animations": false,
+  "session": {
+    "permissions": "prompt"
+  },
+  "attention": {
+    "notifications": true
+  }
+}
